@@ -84,33 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return nombreValido && apellidosValido && dniValido && correoValido && motivoValido;
     };
 
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        if (validarFormulario()){
-            alert("Formulario enviado correctamente!");
-            fetch("https://eorzdw1sjh6kkn1.m.pipedream.net", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    nombre: document.getElementById("nombre").value,
-                    apellidos: document.getElementById("apellidos").value,
-                    dni: document.getElementById("dni").value,
-                    email: document.getElementById("email").value,
-                    fecha_hora: document.getElementById("fecha_hora").value,
-                    sexo: document.getElementById("sexo").value,
-                    motivo: document.getElementById("motivo").value
-                }),
-            })
-                .then((response) => response.text())
-                .then((data) => console.log("Datos enviados:", data))
-                .catch((error) => console.error("Error al enviar:", error));
-        } else {
-            alert("Por favor, corrige los errores en el formulario.")
-        }
-    });
-
     limpiarButton.addEventListener("click", () => {
         form.reset();
         document.querySelectorAll(".error-message").forEach((div) => div.style.display = "none");
